@@ -4,6 +4,7 @@ var socket = io.connect();
 var fight = false;
 var username;
 var users = [];
+var user;
 var winners = 0;
 var players = [];
 var main;
@@ -26,12 +27,29 @@ var p = 0;
 var person;
 var roomnumber = 0;
 var otherplayer;
-function choose() {
-	const { value: user } = await Swal.fire({
+(async () => {
+
+async function choose() {
+	person = await Swal.fire({
+		customClass: {
+			container: "z"
+		},
   input: 'textarea',
   inputLabel: 'Choose an username!'
 })
-	socket.emit("username", user);
+	socket.emit("username", person.value);
+	if(person != null)
+{		
+	document.getElementById("dialog").hidden = true;
+		document.body.style.background = "url(sky.jpg)";
+		document.getElementById("universe").hidden = false;
+		document.getElementById("text").hidden = false;
+		
+			load();
+
+
+}
+
 }
 document.getElementById("dialog").hidden = false;
 document.getElementById("universe").hidden = true;
@@ -39,24 +57,27 @@ document.getElementById("text").hidden = true;
 document.body.style.background = "black";
 document.getElementById("option").innerHTML = "Do You Want To Create A Room?";
 
-document.getElementById("ok").onclick = () => {
-	document.getElementById("dialog").hidden = true;
-	document.body.style.background = "url(sky.jpg)";
-	document.getElementById("universe").hidden = false;
-	document.getElementById("text").hidden = false;
+document.getElementById("ok").onclick = async () => {
 	const { value: room } = await Swal.fire({
+		customClass: {
+			container: "z"
+		},
  	 input: 'textarea',
  	 inputLabel: 'Choose a room name!'
 	})
 	const { value: password } = await Swal.fire({
+		customClass: {
+			container: "z"
+		},
   input: 'password',
   inputLabel: 'Choose a room password!'
 })
-	socket.emit("roomname", room);
-	socket.emit("password", password);
-	load();
+choose();
+
+socket.emit("roomname", room);
+socket.emit("password", password);
 };
-document.getElementById("neither").onclick = () => {
+document.getElementById("neither").onclick = async () => {
 	document.getElementById("dialog").hidden = true;
 	document.body.style.background = "url(sky.jpg)";
 	document.getElementById("universe").hidden = false;
@@ -70,29 +91,35 @@ document.getElementById("neither").onclick = () => {
 	console.log(link);
 	load();
 };
-document.getElementById("no").onclick = () => {
-	document.getElementById("dialog").hidden = true;
-	document.body.style.background = "url(sky.jpg)";
-	document.getElementById("universe").hidden = false;
-	document.getElementById("text").hidden = false;
+document.getElementById("no").onclick = async () => {
 	const { value: roomname } = await Swal.fire({
+		customClass: {
+			container: "z"
+		},
   input: 'textarea',
   inputLabel: 'The room name?'
 })
 	socket.emit("room", roomname);
 	const { value: pass } = await Swal.fire({
+		customClass: {
+			container: "z"
+		},
   input: 'password',
   inputLabel: 'The password?'
 })
+choose();
 	socket.emit("pass", pass);
-	load();
-}
-socket.on("usernotadded", () => {
-	const { value: user } = await Swal.fire({
+
+};
+socket.on("usernotadded", async () => {
+	const person = await Swal.fire({
+		customClass: {
+			container: "z"
+		},
   input: 'textarea',
-  inputLabel: 'Choose an username!'
+  inputLabel: 'Choose an username! Yours was inappropriate or taken.'
 })
-	socket.emit("username", user);
+	socket.emit("username", person.value);
 });
 socket.on("roomclosed", (data) => {
 	if (
@@ -761,3 +788,5 @@ function load() {
 		}
 	}
 }
+
+})()
