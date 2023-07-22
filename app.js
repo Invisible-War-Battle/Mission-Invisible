@@ -32,7 +32,7 @@ var otherplayer;
 async function choose() {
 	person = await Swal.fire({
 		customClass: {
-			container: "z"
+			popup: "z"
 		},
   input: 'textarea',
   inputLabel: 'Choose an username!'
@@ -60,14 +60,14 @@ document.getElementById("option").innerHTML = "Do You Want To Create A Room?";
 document.getElementById("ok").onclick = async () => {
 	const { value: room } = await Swal.fire({
 		customClass: {
-			container: "z"
+			popup: "z"
 		},
  	 input: 'textarea',
  	 inputLabel: 'Choose a room name!'
 	})
 	const { value: password } = await Swal.fire({
 		customClass: {
-			container: "z"
+			popup: "z"
 		},
   input: 'password',
   inputLabel: 'Choose a room password!'
@@ -94,7 +94,7 @@ document.getElementById("neither").onclick = async () => {
 document.getElementById("no").onclick = async () => {
 	const { value: roomname } = await Swal.fire({
 		customClass: {
-			container: "z"
+			popup: "z"
 		},
   input: 'textarea',
   inputLabel: 'The room name?'
@@ -102,7 +102,7 @@ document.getElementById("no").onclick = async () => {
 	socket.emit("room", roomname);
 	const { value: pass } = await Swal.fire({
 		customClass: {
-			container: "z"
+			popup: "z"
 		},
   input: 'password',
   inputLabel: 'The password?'
@@ -114,7 +114,7 @@ choose();
 socket.on("usernotadded", async () => {
 	const person = await Swal.fire({
 		customClass: {
-			container: "z"
+			popup: "z"
 		},
   input: 'textarea',
   inputLabel: 'Choose an username! Yours was inappropriate or taken.'
@@ -147,20 +147,22 @@ socket.on("useradded", (u) => {
 	users = u;
 });
 socket.on("left", (leaving) => {
-	Swal.fire(customClass: { container: "z" },leaving + " left.");
+	
+	Swal.fire((leaving + " left."),customClass: { popup: "z" });
+	
 });
 socket.on("joined", (per) => {
-	Swal.fire(customClass: { 			container: "z" 		},per + " joined.");
+	Swal.fire(customClass: { 			popup: "z" 		},per + " joined.");
 });
 socket.on("leave", (u) => {
 	users = u;
 });
 socket.on("gameover", (killed) => {
-	Swal.fire(customClass: { 			container: "z" 		},killed + " died.");
+	Swal.fire(customClass: { 			popup: "z" 		},killed + " died.");
 });
 
 function load() {
-	Swal.fire(customClass: { 			container: "z" 		},"You have been drafted to fight in the Invisible War. Use arrow keys to move and space to launch a bullet. When you hear a boing sound that is not yours, you will have 5 seconds to run until you are out of range of your target. The catch? No enemy can be seen. Use the coordinates on the left hand side to help you. The range is how far back (-Z) you can be, however, your X must be exact. Kill the 25 enemies to get to PvP. Good luck...");
+	Swal.fire(customClass: { 			popup: "z" 		},"You have been drafted to fight in the Invisible War. Use arrow keys to move and space to launch a bullet. When you hear a boing sound that is not yours, you will have 5 seconds to run until you are out of range of your target. The catch? No enemy can be seen. Use the coordinates on the left hand side to help you. The range is how far back (-Z) you can be, however, your X must be exact. Kill the 25 enemies to get to PvP. Good luck...");
 		choose();
 	function myfunction(tree) {
 		tree.src = "explosion.png";
@@ -176,7 +178,7 @@ function load() {
 			window.getComputedStyle(document.getElementById("universe")).transform
 		);
 		if (matrix4.m41 === -1000 && matrix4.m43 === 0 && ps === 10) {
-			Swal.fire(customClass: { 			container: "z" 		},"Enjoy your new gun.");
+			Swal.fire(customClass: { 			popup: "z" 		},"Enjoy your new gun.");
 			range = 500;
 			document.getElementById("range").innerHTML = "Range: 500";
 			document.removeEventListener("keydown", newgun);
@@ -204,17 +206,17 @@ function load() {
 		document.getElementById("enemy").innerHTML =
 			"A soldier is at X: " + matrix3.m41 + " Z: " + -matrix3.m43;
 		if (ps === 10) {
-			Swal.fire(customClass: { 			container: "z" 		},"Go to X: 0, Z: 0 to get a sniper rifle with 500 range.");
+			Swal.fire(customClass: { 			popup: "z" 		},"Go to X: 0, Z: 0 to get a sniper rifle with 500 range.");
 		}
 		if (ps === 25) {
 			socket.emit("won", person);
-			Swal.fire(customClass: { 			container: "z" 		},
+			Swal.fire(customClass: { 			popup: "z" 		},
 				"You have a final spot! Once another player finishes, PvP will begin."
 			);
 		}
 	}
 	socket.on("point", (username) => {
-		Swal.fire(customClass: { 			container: "z" 		},username + " got a point!");
+		Swal.fire(customClass: { 			popup: "z" 		},username + " got a point!");
 	});
 	sol1 = document.getElementById("panther");
 
@@ -258,7 +260,7 @@ function load() {
 								) {
 									health.value--;
 									if (health.value === 0) {
-										Swal.fire(customClass: { 			container: "z" 		},"You died.");
+										Swal.fire(customClass: { 			popup: "z" 		},"You died.");
 										socket.emit("died", person);
 										location.reload();
 									}
@@ -298,7 +300,7 @@ function load() {
 								) {
 									health.value--;
 									if (health.value === 0) {
-										Swal.fire(customClass: { 			container: "z" 		},"You died.");
+										Swal.fire(customClass: { 			popup: "z" 		},"You died.");
 										socket.emit("died", person);
 										location.reload();
 									}
@@ -489,7 +491,7 @@ function load() {
 				}, 2000);
 			} else {
 				if (ammo === 0) {
-					Swal.fire(customClass: { 			container: "z" 		},"No ammo. reloading in 3 seconds...");
+					Swal.fire(customClass: { 			popup: "z" 		},"No ammo. reloading in 3 seconds...");
 					setTimeout(() => {
 						ammo = 20;
 						document.getElementById("ammo").innerHTML = "Ammo: " + ammo;
@@ -715,12 +717,12 @@ function load() {
 
 	socket.on("winner", (winner) => {
 		winners++;
-		Swal.fire(customClass: { 			container: "z" 		},winner + " has a final spot!");
+		Swal.fire(customClass: { 			popup: "z" 		},winner + " has a final spot!");
 	});
 	socket.on("winners", (people) => {
 		console.log(people);
 		if (people.includes(person)) {
-			Swal.fire(customClass: { 			container: "z" 		},"The fight shall begin!");
+			Swal.fire(customClass: { 			popup: "z" 		},"The fight shall begin!");
 			fight = true;
 			health.max = 20;
 			health.value = 20;
@@ -735,7 +737,7 @@ function load() {
 			document.getElementById("enemyhealth").hidden = false;
 			document.getElementById("healthp").hidden = false;
 		} else {
-			Swal.fire(customClass: { 			container: "z" 		},
+			Swal.fire(customClass: { 			popup: "z" 		},
 				"Sorry, you did not finish before the other players. Good luck next time!"
 			);
 		}
@@ -760,17 +762,17 @@ function load() {
 	socket.on("damage", () => {
 		health.value--;
 		if (health.value === 0) {
-			Swal.fire(customClass: { 			container: "z" 		},"Nice try. However, you did not win. Better luck next time!");
+			Swal.fire(customClass: { 			popup: "z" 		},"Nice try. However, you did not win. Better luck next time!");
 			socket.emit("loser", person);
 			location.reload();
 		}
 	});
 	socket.on("roomnotjoined", () => {
-		Swal.fire(customClass: { 			container: "z" 		},"Room name or password is incorrect. Reloading now...");
+		Swal.fire(customClass: { 			popup: "z" 		},"Room name or password is incorrect. Reloading now...");
 		location.reload();
 	})
 	socket.on("winnerchosen", () => {
-		Swal.fire(customClass: { 			container: "z" 		},"You Won!");
+		Swal.fire(customClass: { 			popup: "z" 		},"You Won!");
 		location.reload();
 	});
 	var t = 0;
