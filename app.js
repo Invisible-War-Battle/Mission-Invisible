@@ -127,14 +127,7 @@ socket.on("roomclosed", (data) => {
 		typeof users[1 + data.number] != "undefined" &&
 		typeof users[2 + data.number] != "undefined"
 	) {
-		Swal.fire(customClass: { 			container: "z" 		},
-			"Game room closed. Players are " +
-			users[0 + data.number] +
-			", " +
-			users[1 + data.number] +
-			", " +
-			users[2 + data.number]
-		);
+		
 		roomnumber = data.room;
 		var play = 0;
 		users.forEach((player) => {
@@ -154,7 +147,7 @@ socket.on("useradded", (u) => {
 	users = u;
 });
 socket.on("left", (leaving) => {
-	Swal.fire(customClass: { 			container: "z" 		},leaving + " left.");
+	Swal.fire(customClass: { container: "z" },leaving + " left.");
 });
 socket.on("joined", (per) => {
 	Swal.fire(customClass: { 			container: "z" 		},per + " joined.");
