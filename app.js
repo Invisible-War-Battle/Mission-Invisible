@@ -127,7 +127,7 @@ socket.on("roomclosed", (data) => {
 		typeof users[1 + data.number] != "undefined" &&
 		typeof users[2 + data.number] != "undefined"
 	) {
-		Swal.fire(
+		Swal.fire(customClass: { 			container: "z" 		},
 			"Game room closed. Players are " +
 			users[0 + data.number] +
 			", " +
@@ -154,20 +154,20 @@ socket.on("useradded", (u) => {
 	users = u;
 });
 socket.on("left", (leaving) => {
-	Swal.fire(leaving + " left.");
+	Swal.fire(customClass: { 			container: "z" 		},leaving + " left.");
 });
 socket.on("joined", (per) => {
-	Swal.fire(per + " joined.");
+	Swal.fire(customClass: { 			container: "z" 		},per + " joined.");
 });
 socket.on("leave", (u) => {
 	users = u;
 });
 socket.on("gameover", (killed) => {
-	Swal.fire(killed + " died.");
+	Swal.fire(customClass: { 			container: "z" 		},killed + " died.");
 });
 
 function load() {
-	Swal.fire("You have been drafted to fight in the Invisible War. Use arrow keys to move and space to launch a bullet. When you hear a boing sound that is not yours, you will have 5 seconds to run until you are out of range of your target. The catch? No enemy can be seen. Use the coordinates on the left hand side to help you. The range is how far back (-Z) you can be, however, your X must be exact. Kill the 25 enemies to get to PvP. Good luck...");
+	Swal.fire(customClass: { 			container: "z" 		},"You have been drafted to fight in the Invisible War. Use arrow keys to move and space to launch a bullet. When you hear a boing sound that is not yours, you will have 5 seconds to run until you are out of range of your target. The catch? No enemy can be seen. Use the coordinates on the left hand side to help you. The range is how far back (-Z) you can be, however, your X must be exact. Kill the 25 enemies to get to PvP. Good luck...");
 		choose();
 	function myfunction(tree) {
 		tree.src = "explosion.png";
@@ -183,7 +183,7 @@ function load() {
 			window.getComputedStyle(document.getElementById("universe")).transform
 		);
 		if (matrix4.m41 === -1000 && matrix4.m43 === 0 && ps === 10) {
-			Swal.fire("Enjoy your new gun.");
+			Swal.fire(customClass: { 			container: "z" 		},"Enjoy your new gun.");
 			range = 500;
 			document.getElementById("range").innerHTML = "Range: 500";
 			document.removeEventListener("keydown", newgun);
@@ -211,17 +211,17 @@ function load() {
 		document.getElementById("enemy").innerHTML =
 			"A soldier is at X: " + matrix3.m41 + " Z: " + -matrix3.m43;
 		if (ps === 10) {
-			Swal.fire("Go to X: 0, Z: 0 to get a sniper rifle with 500 range.");
+			Swal.fire(customClass: { 			container: "z" 		},"Go to X: 0, Z: 0 to get a sniper rifle with 500 range.");
 		}
 		if (ps === 25) {
 			socket.emit("won", person);
-			Swal.fire(
+			Swal.fire(customClass: { 			container: "z" 		},
 				"You have a final spot! Once another player finishes, PvP will begin."
 			);
 		}
 	}
 	socket.on("point", (username) => {
-		Swal.fire(username + " got a point!");
+		Swal.fire(customClass: { 			container: "z" 		},username + " got a point!");
 	});
 	sol1 = document.getElementById("panther");
 
@@ -265,7 +265,7 @@ function load() {
 								) {
 									health.value--;
 									if (health.value === 0) {
-										Swal.fire("You died.");
+										Swal.fire(customClass: { 			container: "z" 		},"You died.");
 										socket.emit("died", person);
 										location.reload();
 									}
@@ -305,7 +305,7 @@ function load() {
 								) {
 									health.value--;
 									if (health.value === 0) {
-										Swal.fire("You died.");
+										Swal.fire(customClass: { 			container: "z" 		},"You died.");
 										socket.emit("died", person);
 										location.reload();
 									}
@@ -496,7 +496,7 @@ function load() {
 				}, 2000);
 			} else {
 				if (ammo === 0) {
-					Swal.fire("No ammo. reloading in 3 seconds...");
+					Swal.fire(customClass: { 			container: "z" 		},"No ammo. reloading in 3 seconds...");
 					setTimeout(() => {
 						ammo = 20;
 						document.getElementById("ammo").innerHTML = "Ammo: " + ammo;
@@ -722,12 +722,12 @@ function load() {
 
 	socket.on("winner", (winner) => {
 		winners++;
-		Swal.fire(winner + " has a final spot!");
+		Swal.fire(customClass: { 			container: "z" 		},winner + " has a final spot!");
 	});
 	socket.on("winners", (people) => {
 		console.log(people);
 		if (people.includes(person)) {
-			Swal.fire("The fight shall begin!");
+			Swal.fire(customClass: { 			container: "z" 		},"The fight shall begin!");
 			fight = true;
 			health.max = 20;
 			health.value = 20;
@@ -742,7 +742,7 @@ function load() {
 			document.getElementById("enemyhealth").hidden = false;
 			document.getElementById("healthp").hidden = false;
 		} else {
-			Swal.fire(
+			Swal.fire(customClass: { 			container: "z" 		},
 				"Sorry, you did not finish before the other players. Good luck next time!"
 			);
 		}
@@ -767,17 +767,17 @@ function load() {
 	socket.on("damage", () => {
 		health.value--;
 		if (health.value === 0) {
-			Swal.fire("Nice try. However, you did not win. Better luck next time!");
+			Swal.fire(customClass: { 			container: "z" 		},"Nice try. However, you did not win. Better luck next time!");
 			socket.emit("loser", person);
 			location.reload();
 		}
 	});
 	socket.on("roomnotjoined", () => {
-		Swal.fire("Room name or password is incorrect. Reloading now...");
+		Swal.fire(customClass: { 			container: "z" 		},"Room name or password is incorrect. Reloading now...");
 		location.reload();
 	})
 	socket.on("winnerchosen", () => {
-		Swal.fire("You Won!");
+		Swal.fire(customClass: { 			container: "z" 		},"You Won!");
 		location.reload();
 	});
 	var t = 0;
