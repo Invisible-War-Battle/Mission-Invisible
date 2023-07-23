@@ -148,29 +148,26 @@ socket.on("useradded", (u) => {
 	users = u;
 });
 socket.on("left", (leaving) => {
-	alerts.forEach(alert=> {
-		alert.style.perspective = "5500px";
-		alert.style.translate = "0px 0px 5000px";
-	})
+		
+
 	Swal.fire((leaving + " left."));
-	
+	alerts[0].style.perspective = "5500px";
+		alerts[0].style.translate = "0px 0px 5000px";
 });
 socket.on("joined", (per) => {
-	alerts.forEach(alert=> {
-		alert.style.perspective = "5500px";
-		alert.style.translate = "0px 0px 5000px";
-	})
+	
 	Swal.fire(per + " joined.");
+	alerts[0].style.perspective = "5500px";
+		alerts[0].style.translate = "0px 0px 5000px";
 });
 socket.on("leave", (u) => {
 	users = u;
 });
 socket.on("gameover", (killed) => {
-	alerts.forEach(alert=> {
-		alert.style.perspective = "5500px";
-		alert.style.translate = "0px 0px 5000px";
-	})
+	
 	Swal.fire(killed + " died.");
+	alerts[0].style.perspective = "5500px";
+		alerts[0].style.translate = "0px 0px 5000px";
 });
 
 function load() {
