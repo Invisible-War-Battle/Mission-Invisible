@@ -19,6 +19,7 @@ var matrix4;
 var matrix = new WebKitCSSMatrix(
 	window.getComputedStyle(document.getElementById("bullet")).transform
 );
+var alerts = Array.from(document.getElementsByClassName("swal2-container"));
 var ps = 0;
 var sol1 = document.getElementById("panther");
 var matrix3;
@@ -147,17 +148,28 @@ socket.on("useradded", (u) => {
 	users = u;
 });
 socket.on("left", (leaving) => {
-	
+	alerts.forEach(alert=> {
+		alert.style.perspective = "5500px";
+		alert.style.translate = "0px 0px 5000px";
+	})
 	Swal.fire((leaving + " left."));
 	
 });
 socket.on("joined", (per) => {
+	alerts.forEach(alert=> {
+		alert.style.perspective = "5500px";
+		alert.style.translate = "0px 0px 5000px";
+	})
 	Swal.fire(per + " joined.");
 });
 socket.on("leave", (u) => {
 	users = u;
 });
 socket.on("gameover", (killed) => {
+	alerts.forEach(alert=> {
+		alert.style.perspective = "5500px";
+		alert.style.translate = "0px 0px 5000px";
+	})
 	Swal.fire(killed + " died.");
 });
 
