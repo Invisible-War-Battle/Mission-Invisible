@@ -31,9 +31,9 @@ var otherplayer;
 (async () => {
 
 async function choose() {
-	person = await Swal.fire({
+	person = await Swal.fire({customClass: { 			container: "z" 		},
 		customClass: {
-			popup: "z"
+			container: "z"
 		},
   input: 'textarea',
   inputLabel: 'Choose an username!'
@@ -57,18 +57,17 @@ document.getElementById("universe").hidden = true;
 document.getElementById("text").hidden = true;
 document.body.style.background = "black";
 document.getElementById("option").innerHTML = "Do You Want To Create A Room?";
-Swal.getContainer().style.height = "2000px";
 document.getElementById("ok").onclick = async () => {
-	const { value: room } = await Swal.fire({
+	const { value: room } = await Swal.fire({customClass: { 			container: "z" 		},
 		customClass: {
-			popup: "z"
+			container: "z"
 		},
  	 input: 'textarea',
  	 inputLabel: 'Choose a room name!'
 	})
-	const { value: password } = await Swal.fire({
+	const { value: password } = await Swal.fire({customClass: { 			container: "z" 		},
 		customClass: {
-			popup: "z"
+			container: "z"
 		},
   input: 'password',
   inputLabel: 'Choose a room password!'
@@ -93,17 +92,17 @@ document.getElementById("neither").onclick = async () => {
 	load();
 };
 document.getElementById("no").onclick = async () => {
-	const { value: roomname } = await Swal.fire({
+	const { value: roomname } = await Swal.fire({customClass: { 			container: "z" 		},
 		customClass: {
-			popup: "z"
+			container: "z"
 		},
   input: 'textarea',
   inputLabel: 'The room name?'
 })
 	socket.emit("room", roomname);
-	const { value: pass } = await Swal.fire({
+	const { value: pass } = await Swal.fire({customClass: { 			container: "z" 		},
 		customClass: {
-			popup: "z"
+			container: "z"
 		},
   input: 'password',
   inputLabel: 'The password?'
@@ -113,9 +112,9 @@ choose();
 
 };
 socket.on("usernotadded", async () => {
-	const person = await Swal.fire({
+	const person = await Swal.fire({customClass: { 			container: "z" 		},
 		customClass: {
-			popup: "z"
+			container: "z"
 		},
   input: 'textarea',
   inputLabel: 'Choose an username! Yours was inappropriate or taken.'
@@ -150,24 +149,24 @@ socket.on("useradded", (u) => {
 socket.on("left", (leaving) => {
 		
 
-	Swal.fire({text: leaving + " left."}).then(()=> {})
+	Swal.fire({customClass: { 			container: "z" 		},text: leaving + " left."}).then(()=> {})
 });
 socket.on("joined", (per) => {
 	
-	Swal.fire({text : per + " joined."}).then(()=> {universe.hidden = false;})
+	Swal.fire({customClass: { 			container: "z" 		},text : per + " joined."}).then(()=> {universe.hidden = false;})
 });
 socket.on("leave", (u) => {
 	users = u;
 });
 socket.on("gameover", (killed) => {
 	
-	Swal.fire({text : killed + " died."}).then(()=> {universe.hidden = false;})
+	Swal.fire({customClass: { 			container: "z" 		},text : killed + " died."}).then(()=> {universe.hidden = false;})
 });
 
 function load() {
 		
 
-	Swal.fire({text:"You have been drafted to fight in the Invisible War. Use arrow keys to move and space to launch a bullet. When you hear a boing sound that is not yours, you will have 5 seconds to run until you are out of range of your target. The catch? No enemy can be seen. Use the coordinates on the left hand side to help you. The range is how far back (-Z) you can be, however, your X must be exact. Kill the 25 enemies to get to PvP. Good luck..."}).then(()=> {universe.hidden = false;})
+	Swal.fire({customClass: { 			container: "z" 		},text:"You have been drafted to fight in the Invisible War. Use arrow keys to move and space to launch a bullet. When you hear a boing sound that is not yours, you will have 5 seconds to run until you are out of range of your target. The catch? No enemy can be seen. Use the coordinates on the left hand side to help you. The range is how far back (-Z) you can be, however, your X must be exact. Kill the 25 enemies to get to PvP. Good luck..."}).then(()=> {universe.hidden = false;})
 
 	function myfunction(tree) {
 		tree.src = "explosion.png";
@@ -185,7 +184,7 @@ function load() {
 		if (matrix4.m41 === -1000 && matrix4.m43 === 0 && ps === 10) {
 				
 
-			Swal.fire({text: "Enjoy your new gun."}).then(()=> {universe.hidden = false;})
+			Swal.fire({customClass: { 			container: "z" 		},text: "Enjoy your new gun."}).then(()=> {universe.hidden = false;})
 			range = 500;
 			document.getElementById("range").innerHTML = "Range: 500";
 			document.removeEventListener("keydown", newgun);
@@ -214,7 +213,7 @@ function load() {
 			"A soldier is at X: " + matrix3.m41 + " Z: " + -matrix3.m43;
 		if (ps === 10) {	
 
-			Swal.fire({text: "Go to X: 0, Z: 0 to get a sniper rifle with 500 range."}).then(()=> {universe.hidden = false;})
+			Swal.fire({customClass: { 			container: "z" 		},text: "Go to X: 0, Z: 0 to get a sniper rifle with 500 range."}).then(()=> {universe.hidden = false;})
 		}
 		if (ps === 25) {
 			socket.emit("won", person);
@@ -227,7 +226,7 @@ function load() {
 	}
 	socket.on("point", (username) => {
 	
-		Swal.fire({text: username + " got a point!"}).then(()=> {universe.hidden = false;})
+		Swal.fire({customClass: { 			container: "z" 		},text: username + " got a point!"}).then(()=> {universe.hidden = false;})
 	});
 	sol1 = document.getElementById("panther");
 
@@ -272,7 +271,7 @@ function load() {
 									health.value--;
 									if (health.value === 0) {
 	
-										Swal.fire({text: "You died."}).then(()=> {universe.hidden = false;})
+										Swal.fire({customClass: { 			container: "z" 		},text: "You died."}).then(()=> {universe.hidden = false;})
 
 										socket.emit("died", person);
 										location.reload();
@@ -314,7 +313,7 @@ function load() {
 									health.value--;
 									if (health.value === 0) {
 											
-										Swal.fire({text: "You died."}).then(()=> {universe.hidden = false;})
+										Swal.fire({customClass: { 			container: "z" 		},text: "You died."}).then(()=> {universe.hidden = false;})
 										socket.emit("died", person);
 										location.reload();
 									}
@@ -506,7 +505,7 @@ function load() {
 			} else {
 				if (ammo === 0) {
 						
-					Swal.fire({text: "No ammo. reloading in 3 seconds..."}).then(()=> {universe.hidden = false;})
+					Swal.fire({customClass: { 			container: "z" 		},text: "No ammo. reloading in 3 seconds..."}).then(()=> {universe.hidden = false;})
 
 					setTimeout(() => {
 						ammo = 20;
@@ -735,7 +734,7 @@ function load() {
 		winners++;
 			
 
-		Swal.fire({ text: winner + " has a final spot!"}).then(()=> {universe.hidden = false;})
+		Swal.fire({customClass: { 			container: "z" 		}, text: winner + " has a final spot!"}).then(()=> {universe.hidden = false;})
 
 	});
 	socket.on("winners", (people) => {
@@ -743,7 +742,7 @@ function load() {
 		if (people.includes(person)) {
 				
 
-			Swal.fire({text : "The fight shall begin!"}).then(()=> {universe.hidden = false;})
+			Swal.fire({customClass: { 			container: "z" 		},text : "The fight shall begin!"}).then(()=> {universe.hidden = false;})
 
 			fight = true;
 			health.max = 20;
@@ -761,7 +760,7 @@ function load() {
 		} else {
 				
 
-			Swal.fire({
+			Swal.fire({customClass: { 			container: "z" 		},
 				text: "Sorry, you did not finish before the other players. Good luck next time!"
 				  }).then(()=> {universe.hidden = false;})
 
@@ -789,7 +788,7 @@ function load() {
 		if (health.value === 0) {
 				
 
-			Swal.fire({text: "Nice try. However, you did not win. Better luck next time!"}).then(()=> {universe.hidden = false;})
+			Swal.fire({customClass: { 			container: "z" 		},text: "Nice try. However, you did not win. Better luck next time!"}).then(()=> {universe.hidden = false;})
 
 			socket.emit("loser", person);
 			location.reload();
@@ -798,14 +797,14 @@ function load() {
 	socket.on("roomnotjoined", () => {
 			
 
-		Swal.fire({text:"Room name or password is incorrect. Reloading now..."}).then(()=> {universe.hidden = false;})
+		Swal.fire({customClass: { 			container: "z" 		},text:"Room name or password is incorrect. Reloading now..."}).then(()=> {universe.hidden = false;})
 
 		location.reload();
 	})
 	socket.on("winnerchosen", () => {
 			
 
-		Swal.fire({text:"You Won!"}).then(()=> {universe.hidden = false;})
+		Swal.fire({customClass: { 			container: "z" 		},text:"You Won!"}).then(()=> {universe.hidden = false;})
 
 		location.reload();
 	});
