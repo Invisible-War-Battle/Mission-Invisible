@@ -31,7 +31,7 @@ var otherplayer;
 (async () => {
 
 async function choose() {
-	person = await Swal.fire({customClass: { 			container: "z" 		},
+	person = await Swal.fire({
 		customClass: {
 			container: "z"
 		},
@@ -58,14 +58,14 @@ document.getElementById("text").hidden = true;
 document.body.style.background = "black";
 document.getElementById("option").innerHTML = "Do You Want To Create A Room?";
 document.getElementById("ok").onclick = async () => {
-	const { value: room } = await Swal.fire({customClass: { 			container: "z" 		},
+	const { value: room } = await Swal.fire({
 		customClass: {
 			container: "z"
 		},
  	 input: 'textarea',
  	 inputLabel: 'Choose a room name!'
 	})
-	const { value: password } = await Swal.fire({customClass: { 			container: "z" 		},
+	const { value: password } = await Swal.fire({
 		customClass: {
 			container: "z"
 		},
@@ -165,6 +165,7 @@ socket.on("gameover", (killed) => {
 
 function load() {
 		
+document.getElementById("text").hidden = false;
 
 	Swal.fire({customClass: { 			container: "z" 		},text:"You have been drafted to fight in the Invisible War. Use arrow keys to move and space to launch a bullet. When you hear a boing sound that is not yours, you will have 5 seconds to run until you are out of range of your target. The catch? No enemy can be seen. Use the coordinates on the left hand side to help you. The range is how far back (-Z) you can be, however, your X must be exact. Kill the 25 enemies to get to PvP. Good luck..."}).then(()=> {universe.hidden = false;})
 
