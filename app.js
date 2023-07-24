@@ -57,7 +57,7 @@ document.getElementById("universe").hidden = true;
 document.getElementById("text").hidden = true;
 document.body.style.background = "black";
 document.getElementById("option").innerHTML = "Do You Want To Create A Room?";
-
+Swal.getContainer().style.height = "2000px";
 document.getElementById("ok").onclick = async () => {
 	const { value: room } = await Swal.fire({
 		customClass: {
