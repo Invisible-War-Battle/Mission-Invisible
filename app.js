@@ -150,28 +150,24 @@ socket.on("useradded", (u) => {
 socket.on("left", (leaving) => {
 		universe.hidden = true;
 
-	Swal.fire((leaving + " left."));
-	universe.hidden = false;
+	Swal.fire((leaving + " left.")).then(()=> {})
 });
 socket.on("joined", (per) => {
 	universe.hidden = true;
-	Swal.fire(per + " joined.");
-	universe.hidden = false;
+	Swal.fire(per + " joined.").then(()=> {universe.hidden = false;})
 });
 socket.on("leave", (u) => {
 	users = u;
 });
 socket.on("gameover", (killed) => {
 	universe.hidden = true;
-	Swal.fire(killed + " died.");
-	universe.hidden = false;
+	Swal.fire(killed + " died.").then(()=> {universe.hidden = false;})
 });
 
 function load() {
 		universe.hidden = true;
 
-	Swal.fire("You have been drafted to fight in the Invisible War. Use arrow keys to move and space to launch a bullet. When you hear a boing sound that is not yours, you will have 5 seconds to run until you are out of range of your target. The catch? No enemy can be seen. Use the coordinates on the left hand side to help you. The range is how far back (-Z) you can be, however, your X must be exact. Kill the 25 enemies to get to PvP. Good luck...");
-	universe.hidden = false;
+	Swal.fire("You have been drafted to fight in the Invisible War. Use arrow keys to move and space to launch a bullet. When you hear a boing sound that is not yours, you will have 5 seconds to run until you are out of range of your target. The catch? No enemy can be seen. Use the coordinates on the left hand side to help you. The range is how far back (-Z) you can be, however, your X must be exact. Kill the 25 enemies to get to PvP. Good luck...").then(()=> {universe.hidden = false;})
 
 	function myfunction(tree) {
 		tree.src = "explosion.png";
@@ -189,8 +185,7 @@ function load() {
 		if (matrix4.m41 === -1000 && matrix4.m43 === 0 && ps === 10) {
 				universe.hidden = true;
 
-			Swal.fire("Enjoy your new gun.");
-	universe.hidden = false;
+			Swal.fire("Enjoy your new gun.").then(()=> {universe.hidden = false;})
 			range = 500;
 			document.getElementById("range").innerHTML = "Range: 500";
 			document.removeEventListener("keydown", newgun);
@@ -219,8 +214,7 @@ function load() {
 			"A soldier is at X: " + matrix3.m41 + " Z: " + -matrix3.m43;
 		if (ps === 10) {	universe.hidden = true;
 
-			Swal.fire("Go to X: 0, Z: 0 to get a sniper rifle with 500 range.");
-	universe.hidden = false;
+			Swal.fire("Go to X: 0, Z: 0 to get a sniper rifle with 500 range.").then(()=> {universe.hidden = false;})
 		}
 		if (ps === 25) {
 			socket.emit("won", person);
@@ -228,14 +222,12 @@ function load() {
 
 			Swal.fire(
 				"You have a final spot! Once another player finishes, PvP will begin."
-			);
-	universe.hidden = false;
+			).then(()=> {universe.hidden = false;})
 		}
 	}
 	socket.on("point", (username) => {
 	universe.hidden = true;
-		Swal.fire(username + " got a point!");
-	universe.hidden = false;
+		Swal.fire(username + " got a point!").then(()=> {universe.hidden = false;})
 	});
 	sol1 = document.getElementById("panther");
 
@@ -280,8 +272,7 @@ function load() {
 									health.value--;
 									if (health.value === 0) {
 	universe.hidden = true;
-										Swal.fire("You died.");
-											universe.hidden = false;
+										Swal.fire("You died.").then(()=> {universe.hidden = false;})
 
 										socket.emit("died", person);
 										location.reload();
@@ -323,8 +314,7 @@ function load() {
 									health.value--;
 									if (health.value === 0) {
 											universe.hidden = true;
-										Swal.fire("You died.");
-											universe.hidden = false;
+										Swal.fire("You died.").then(()=> {universe.hidden = false;})
 										socket.emit("died", person);
 										location.reload();
 									}
@@ -516,8 +506,7 @@ function load() {
 			} else {
 				if (ammo === 0) {
 						universe.hidden = true;
-					Swal.fire("No ammo. reloading in 3 seconds...");
-						universe.hidden = false;
+					Swal.fire("No ammo. reloading in 3 seconds...").then(()=> {universe.hidden = false;})
 
 					setTimeout(() => {
 						ammo = 20;
@@ -746,8 +735,7 @@ function load() {
 		winners++;
 			universe.hidden = true;
 
-		Swal.fire(winner + " has a final spot!");
-			universe.hidden = false;
+		Swal.fire(winner + " has a final spot!").then(()=> {universe.hidden = false;})
 
 	});
 	socket.on("winners", (people) => {
@@ -755,8 +743,7 @@ function load() {
 		if (people.includes(person)) {
 				universe.hidden = true;
 
-			Swal.fire("The fight shall begin!");
-				universe.hidden = false;
+			Swal.fire("The fight shall begin!").then(()=> {universe.hidden = false;})
 
 			fight = true;
 			health.max = 20;
@@ -776,8 +763,7 @@ function load() {
 
 			Swal.fire(
 				"Sorry, you did not finish before the other players. Good luck next time!"
-			);
-				universe.hidden = false;
+			).then(()=> {universe.hidden = false;})
 
 		}
 	});
@@ -803,8 +789,7 @@ function load() {
 		if (health.value === 0) {
 				universe.hidden = true;
 
-			Swal.fire("Nice try. However, you did not win. Better luck next time!");
-				universe.hidden = false;
+			Swal.fire("Nice try. However, you did not win. Better luck next time!").then(()=> {universe.hidden = false;})
 
 			socket.emit("loser", person);
 			location.reload();
@@ -813,16 +798,14 @@ function load() {
 	socket.on("roomnotjoined", () => {
 			universe.hidden = true;
 
-		Swal.fire("Room name or password is incorrect. Reloading now...");
-			universe.hidden = false;
+		Swal.fire("Room name or password is incorrect. Reloading now...").then(()=> {universe.hidden = false;})
 
 		location.reload();
 	})
 	socket.on("winnerchosen", () => {
 			universe.hidden = true;
 
-		Swal.fire("You Won!");
-			universe.hidden = false;
+		Swal.fire("You Won!").then(()=> {universe.hidden = false;})
 
 		location.reload();
 	});
